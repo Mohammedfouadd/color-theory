@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Variables Color Picker</title>
+  <style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #e74c3c;
+      --background-color: #f3f3f3;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--background-color);
+      color: var(--primary-color);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .color-box {
+      padding: 10px;
+      border: 2px solid var(--secondary-color);
+      border-radius: 5px;
+    }
+
+    .color-picker-panel {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .color-picker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .color-picker label {
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="color-box">
+    <h1>CSS Variables Color Picker</h1>
+    <p>Use the color pickers below to change the colors dynamically.</p>
+  </div>
+
+  <div class="color-picker-panel">
+    <div class="color-picker">
+      <label for="primary-color">Primary Color:</label>
+      <input type="color" id="primary-color" value="#3498db">
+    </div>
+    <div class="color-picker">
+      <label for="secondary-color">Secondary Color:</label>
+      <input type="color" id="secondary-color" value="#e74c3c">
+    </div>
+    <div class="color-picker">
+      <label for="background-color">Background Color:</label>
+      <input type="color" id="background-color" value="#f3f3f3">
+    </div>
+  </div>
+
+  <script>
+    // Get the current URL
+    const currentURL = window.location.href;
+
+    // Regular expression to check if "salla" exists in the URL
+    const sallaRegex = /salla/i;
+
+    // Select the color-picker-panel
+    const colorPickerPanel = document.querySelector('.color-picker-panel');
+
+    // Hide the panel if the URL contains "salla"
+    if (sallaRegex.test(currentURL)) {
+      colorPickerPanel.classList.add('hidden');
+    }
+
+    // Color picker functionality (only runs if the panel is visible)
+    const primaryColorPicker = document.getElementById('primary-color');
+    const secondaryColorPicker = document.getElementById('secondary-color');
+    const backgroundColorPicker = document.getElementById('background-color');
+
+    primaryColorPicker.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--primary-color', e.target.value);
+    });
+
+    secondaryColorPicker.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--secondary-color', e.target.value);
+    });
+
+    backgroundColorPicker.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--background-color', e.target.value);
+    });
+  </script>
+</body>
+</html>
